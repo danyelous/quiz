@@ -21,30 +21,64 @@ html, body{
 	margin: 0 auto 0 auto;
 }
 #content {
-    background: rgba(255, 255, 255, 0.60);
-    border-radius: 25px;
+    background: url('film.jpg') repeat-y top left;
     padding: 25px;
-	min-height: 420px;
+	min-height: 520px;
 	margin: 50px 0px 0px 0px;
+	border-top: 4px #000 solid;
+	border-bottom: 4px #000 solid;
 }
+
 h1 {
     color: #4d4d4d;
     font-size: 3em;
     text-align: center;
 }
+h3 {
+    color: #4d4d4d;
+    font-size: 1.4em;
+}
 
 #information{
-    width: 100%;
-	margin: 10px 5px 10px 5px;
+    width: 600px;
+	min-height: 50px;
+    margin: 10px auto 10px auto;
 }
 
 #questiondisplay{
-    width: 100%;
-	margin: 10px 5px 10px 5px;
-	min-height: 200px
+    margin: 10px auto 10px auto;
+    min-height: 250px;
+    width: 600px;
+}
+h3.pointstitle, h3.progress, a.reset {
+    display: inline-block;
+}
+h3.pointstitle {
+    margin: 10px 50px 10px 0px;
+	color: #0066FF;
+}
+h3.progress {
+    margin: 10px 50px 10px 10px;
+	color: #0066FF;
+}
+a.reset {
+	cursor: pointer;
+    color: #ff6600;
+    font-size: 1.2em;
+    text-decoration: none;
+    margin: 5px 0px 10px 10px;
+    float: right;
+}
+a.reset:hover{
+    text-decoration: none;
+}
+ol.options li {
+    font-size: 1.2em;
+}
+.incorrect{
+	color: #d40000;
 }
 
-#controls{
-    width: 100%;
-	margin: 10px 5px 10px 5px;
+.correct{
+    color: #338000;
 }
