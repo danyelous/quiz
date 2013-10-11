@@ -1,0 +1,50 @@
+
+html, body{
+	font-family: helvetica,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+#full-screen-background-image {
+    height: auto;
+    left: 0;
+    min-height: 100%;
+    min-width: 1024px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -999;
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto 0 auto;
+}
+#content {
+    background: rgba(255, 255, 255, 0.60);
+    border-radius: 25px;
+    padding: 25px;
+	min-height: 420px;
+	margin: 50px 0px 0px 0px;
+}
+h1 {
+    color: #4d4d4d;
+    font-size: 3em;
+    text-align: center;
+}
+
+#information{
+    width: 100%;
+	margin: 10px 5px 10px 5px;
+}
+
+#questiondisplay{
+    width: 100%;
+	margin: 10px 5px 10px 5px;
+	min-height: 200px
+}
+
+#controls{
+    width: 100%;
+	margin: 10px 5px 10px 5px;
+}
