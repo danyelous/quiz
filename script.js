@@ -64,9 +64,7 @@ function evaluateEntry(val){
 		insertReply('<span class="incorrect">Incorrect, the correct answer is: ' + questions[currentQuestion].options[questions[currentQuestion].correctAnswer - 1] + '</span>' );
 	
 	}
-	
 
-	
 	currentQuestion = currentQuestion + 1;
 
 	if( currentQuestion < questions.length ){
@@ -88,6 +86,8 @@ function evaluateEntry(val){
 			$('.options').slideUp('slow', function(){
 
 				$('.options').html('');
+				
+				$('.currentquestion').html('&nbsp;&nbsp;');
 
 				$('.reply').html('<center>Your final score: ' + points + '</center>').hide().delay('slow').fadeIn('slow');
 
