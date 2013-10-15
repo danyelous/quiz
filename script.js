@@ -7,24 +7,25 @@ var points = 0;
 
 var questions = new Array();
 
+
+
 // ******************** Input functions ********************
 
-$('.options').on('click', '.radiooption', function(){
+$('.options').on('click', '.radiooption', function(){ //to capture the click on radio buttons
 	var val = $(this).val();
   
 	$('.radiooption').each(function() {
-		$(this).attr('disabled',true);
+		$(this).attr('disabled',true); //I disable the buttons to avoid other clicks
 	});  
-  
 
-	evaluateEntry(val);
+	evaluateEntry(val); //function to evaluate the selection clicked
   
 });
 
 
 // to capture the reset button
 $('.reset').click(function() {
-	reset();
+	reset(); //funtion that perform the reset
 });
 
  
@@ -40,7 +41,7 @@ function Question(title,options,correctAnswer) {
 	this.correctAnswer = correctAnswer;
 }
 
-
+// array of questions objects
 questions[0] = new Question("Which movie was directed by Quentin Tarantino?",["Madagascar.","Spy Game.","Gran Torino.","Django Unchained.","Alien."],4);
 questions[1] = new Question("Which actor never won an Oscar award?",["Jeff Bridges.","Leonardo DiCaprio.","Jamie Foxx.","Sean Penn.","Denzel Washington."],2);
 questions[2] = new Question("What year was Jurassic Park released?",["1992.","1993.","1994.","1995.","1996."],2);
@@ -49,31 +50,34 @@ questions[4] = new Question("Which actress stared Black Swan in 2010?",["Sandra 
 
 
 
-function evaluateEntry(val){
+function evaluateEntry(val){  //function to evaluate the selection clicked
 
-	if(val == questions[currentQuestion].correctAnswer){
+	if(val == questions[currentQuestion].correctAnswer){ //compare if the selection is the correct one
 	
 		// the answer is correct
 		points = points + 1;
-		
-		
+
 		insertReply('<span class="correct">Correct!</span>');
 		
 		insertPoints(points);
+		
 	}else{
+	
+		//  the answer is incorrect
+		
 		insertReply('<span class="incorrect">Incorrect, the correct answer is: ' + questions[currentQuestion].options[questions[currentQuestion].correctAnswer - 1] + '</span>' );
 	
 	}
 
 	currentQuestion = currentQuestion + 1;
 
-	if( currentQuestion < questions.length ){
+	if( currentQuestion < questions.length ){   // as long there are question objects on the array, continnue to add them
 
-		insertQuestion(currentQuestion,4000);
+		insertQuestion(currentQuestion,4000); // function to insert current question number
 		
-	}else{
+	}else{ //the quiz is over, no more questions
 	
-			$('.reply').delay(4000).fadeOut('slow', function() {
+			$('.reply').delay(4000).fadeOut('slow', function() { //  hide all unnecessary elements
 
 			$('.reply').html('');
 
@@ -88,8 +92,10 @@ function evaluateEntry(val){
 				$('.options').html('');
 				
 				$('.currentquestion').html('&nbsp;&nbsp;');
+				
+				$('#reply H3').css("text-align", "center"); // to center the fianl answer
 
-				$('.reply').html('<center>Your final score: ' + points + '</center>').hide().delay('slow').fadeIn('slow');
+				$('.reply').html('Your final score: ' + points).hide().delay('slow').fadeIn('slow'); // show the final score
 
 
 			});
@@ -101,12 +107,27 @@ function evaluateEntry(val){
 
 }
 	
-function reset(){
-	$('.reply').html('<center>Restarting...</center>').hide().fadeIn('slow');
-		window.setTimeout(performReset, 2000);
+function reset(){ //function that perform the reset when clicked
+
+	$('.reply').fadeOut('fast', function(){ //hide current reply
+	
+		$('#reply H3').css("text-align", "center"); // to center the reply
+		
+		$('.reply').html('Restarting...').hide().fadeIn('slow');
+				
+		window.setTimeout(performReset, 2000); //delay to show Restarting... message for a while and then perform the reset itself
+	
+	});
+		
+		
 	}
 	
-function performReset(){
+function performReset(){ //after reset message, restore the quiz to the beginning
+
+		$('.reply').fadeOut('slow', function(){
+			insertReply('');
+			$('#reply H3').css("text-align", "left"); // restore left alignment on replies
+		});
 
 		points = 0;
 		
@@ -114,8 +135,7 @@ function performReset(){
 		
 		$('.pointstitle').fadeIn();
 		$('.progress').fadeIn();
-		
-		insertReply('');
+
 		insertPoints(points);
 		insertQuestion(currentQuestion,250);
 
@@ -130,11 +150,10 @@ function performReset(){
 
 // ******************** HTML insertions functions ********************
 
-function insertQuestion(number, delayTime) {
+function insertQuestion(number, delayTime) { //funtion that append question according to its number
 	
-	var options = questions[number].options;
-		
-	// $('.questiontitle').delay(delayTime).fadeOut('slow', function() {
+	var options = questions[number].options; // obtain questions options
+
 	$('.reply').delay(delayTime).fadeOut('slow', function() {
 
 	$('.reply').html('');
@@ -143,13 +162,13 @@ function insertQuestion(number, delayTime) {
 	
 			$('.options').slideUp('slow', function(){
 
-				insertCurrentQuestionNumber(number);
+				insertCurrentQuestionNumber(number); // funtion to display the current question number
 
-				$('.questiontitle').html(questions[number].title).fadeIn('slow');
+				$('.questiontitle').html(questions[number].title).fadeIn('slow');  // display question title
 
 				$('.options').html('');
 
-				$.each( options, function( index, value ) {
+				$.each( options, function( index, value ) { // append question options
 					$('.options').append('<li> <input type="radio" name="radio" class="radiooption option'+(index + 1)+'"  value="'+(index + 1)+'" > '+ value +' </li>').hide().slideDown('slow');
 				});
 			
@@ -161,7 +180,7 @@ function insertQuestion(number, delayTime) {
 }
 
 
-function insertCurrentQuestionNumber(number){
+function insertCurrentQuestionNumber(number){  // funtion to display the current question number
 	$('.currentquestion').html(number + 1).hide().fadeIn();
 }
 function insertPoints(number){
@@ -173,6 +192,9 @@ function insertReply(text){
 }
 
 
+// to load the first question at the beginning
+
+$('#reply H3').css("text-align", "left");
 insertPoints(points);
 $('.total').html(questions.length).hide().fadeIn();
 insertReply('');
