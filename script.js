@@ -1,4 +1,4 @@
-// HotNCold Game project by Ponto.
+// Quiz Game project by Ponto.
 
 $(document).ready(function() {
 
