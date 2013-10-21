@@ -7,6 +7,8 @@ var points = 0;
 
 var questions = new Array();
 
+var timeout;
+
 
 
 // ******************** Input functions ********************
@@ -19,13 +21,27 @@ $('.options').on('click', '.radiooption', function(){ //to capture the click on 
 	});  
 
 	evaluateEntry(val); //function to evaluate the selection clicked
+	
+	$('.next').fadeIn('fast'); //to show next button
+	
+	
   
+});
+
+// to capture the next button
+$('.next').click(function() {
+
+	clearTimeout(timeout); //Clear the timer
+	goToNextStep(); //Go to next step inmediatelly
+	
 });
 
 
 // to capture the reset button
 $('.reset').click(function() {
-	reset(); //funtion that perform the reset
+
+	clearTimeout(timeout); //Clear the timer
+	reset(); //function that perform the reset
 });
 
  
@@ -68,16 +84,36 @@ function evaluateEntry(val){  //function to evaluate the selection clicked
 		insertReply('<span class="incorrect">Incorrect, the correct answer is: ' + questions[currentQuestion].options[questions[currentQuestion].correctAnswer - 1] + '</span>' );
 	
 	}
+		timeout = setTimeout(function() {
+				goToNextStep(); //  load next question or go to final score display
+				
+		}, 4000);	
 
-	currentQuestion = currentQuestion + 1;
+}
+
+
+function goToNextStep(){
+
+$('.next').fadeOut('fast'); //to hide next button
+
+
+currentQuestion = currentQuestion + 1;
 
 	if( currentQuestion < questions.length ){   // as long there are question objects on the array, continnue to add them
 
-		insertQuestion(currentQuestion,4000); // function to insert current question number
+				  insertQuestion(currentQuestion); // insert next question
 		
 	}else{ //the quiz is over, no more questions
-	
-			$('.reply').delay(4000).fadeOut('slow', function() { //  hide all unnecessary elements
+
+				  showFinalReply(); // show final score
+
+	}
+
+}
+
+function showFinalReply(){
+
+			$('.reply').fadeOut('slow');
 
 			$('.reply').html('');
 
@@ -100,12 +136,8 @@ function evaluateEntry(val){  //function to evaluate the selection clicked
 
 			});
 
-		});
-
-	}
-	
-
 }
+
 	
 function reset(){ //function that perform the reset when clicked
 
@@ -115,7 +147,7 @@ function reset(){ //function that perform the reset when clicked
 		
 		$('.reply').html('Restarting...').hide().fadeIn('slow');
 				
-		window.setTimeout(performReset, 2000); //delay to show Restarting... message for a while and then perform the reset itself
+		setTimeout(performReset, 2000); //delay to show Restarting... message for a while and then perform the reset itself
 	
 	});
 		
@@ -137,7 +169,7 @@ function performReset(){ //after reset message, restore the quiz to the beginnin
 		$('.progress').fadeIn();
 
 		insertPoints(points);
-		insertQuestion(currentQuestion,250);
+		insertQuestion(currentQuestion);
 
 	}
 	
@@ -150,11 +182,12 @@ function performReset(){ //after reset message, restore the quiz to the beginnin
 
 // ******************** HTML insertions functions ********************
 
-function insertQuestion(number, delayTime) { //funtion that append question according to its number
+function insertQuestion(number) { //funtion that append question according to its number
 	
 	var options = questions[number].options; // obtain questions options
 
-	$('.reply').delay(delayTime).fadeOut('slow', function() {
+	// $('.reply').delay(delayTime).fadeOut('slow', function() {
+	$('.reply').fadeOut('slow');
 
 	$('.reply').html('');
 	
@@ -174,7 +207,7 @@ function insertQuestion(number, delayTime) { //funtion that append question acco
 			
 			});
 
-	});
+//	});
 
 
 }
@@ -198,7 +231,7 @@ $('#reply H3').css("text-align", "left");
 insertPoints(points);
 $('.total').html(questions.length).hide().fadeIn();
 insertReply('');
-insertQuestion(0,0);
+insertQuestion(0);
 
 
 

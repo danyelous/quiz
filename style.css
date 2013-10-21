@@ -82,3 +82,9 @@ ol.options li {
 .correct{
     color: #338000;
 }
+
+h3.next{
+	display: none; 
+	float: right;
+	cursor: pointer;
+}
