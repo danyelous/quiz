@@ -59,7 +59,7 @@ function Question(title,options,correctAnswer) {
 
 // array of questions objects
 questions[0] = new Question("Which movie was directed by Quentin Tarantino?",["Madagascar.","Spy Game.","Gran Torino.","Django Unchained.","Alien."],4);
-questions[1] = new Question("Which actor never won an Oscar award?",["Jeff Bridges.","Leonardo DiCaprio.","Jamie Foxx.","Sean Penn.","Denzel Washington."],2);
+questions[1] = new Question("Which actor never won an Oscar award?",["Jeff Bridges.","Tom Cruise.","Jamie Foxx.","Sean Penn.","Denzel Washington."],2);
 questions[2] = new Question("What year was Jurassic Park released?",["1992.","1993.","1994.","1995.","1996."],2);
 questions[3] = new Question("According to Fight Club movie from 1999, which is the Fight Club first rule?",["Someone yells stop, goes limp, taps out, the fight is over.","Only two guys to a fight.","You do not talk about Fight Club.","One fight at a time, fellas.","If this is your first night at Fight Club, you have to fight."],3);
 questions[4] = new Question("Which actress stared Black Swan in 2010?",["Sandra Bullock.","Jennifer Lawrence.","Rachel McAdams.","Scarlett Johansson.","Natalie Portman."],5);
